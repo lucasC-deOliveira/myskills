@@ -1,12 +1,12 @@
 
 import React, { useEffect, useState } from "react"
-import { View, Text, StyleSheet, TextInput, FlatList, Platform} from "react-native"
+import { View, Text, StyleSheet, TextInput, FlatList, Platform } from "react-native"
 import { Button } from "../components/Button"
 import { SkillCard } from "../components/SkillCard"
 
-interface SkillData{
-  id:string,
-  name:string,
+interface SkillData {
+  id: string,
+  name: string,
 }
 
 
@@ -14,14 +14,21 @@ export function Home() {
   const [newSkills, setNewSkills] = useState("")
   const [mySkills, setMySkills] = useState<SkillData[]>([])
   const [greeting, setGreeting] = useState('')
+
   function handleNewSkill() {
 
-    const data ={
+    const data = {
       id: String(new Date().getTime()),
       name: newSkills
     }
 
     setMySkills(oldSkills => [...oldSkills, data])
+  }
+
+  function handleRemoveSkill(id: string) {
+    setMySkills(oldState => {
+      return oldState.filter(skill => skill.id !== id)
+    })
   }
 
   useEffect(() => {
@@ -62,7 +69,10 @@ export function Home() {
         data={mySkills}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <SkillCard skill={item.name} />
+          <SkillCard
+            skill={item.name}
+            onPress={() => handleRemoveSkill(item.id)}
+          />
         )
         }
       />
