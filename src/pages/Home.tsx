@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react"
-import { View, Text, StyleSheet, TextInput, FlatList} from "react-native"
+import { View, Text, StyleSheet, TextInput, FlatList, Platform} from "react-native"
 import { Button } from "../components/Button"
 import { SkillCard } from "../components/SkillCard"
 
@@ -51,7 +51,7 @@ export function Home() {
         placeholderTextColor="#555"
         onChangeText={setNewSkills}
       />
-      <Button onPress={handleNewSkill} />
+      <Button title="Add" onPress={handleNewSkill} />
 
       <Text style={[styles.title, { marginVertical: 50 }]}>
         My Skills
